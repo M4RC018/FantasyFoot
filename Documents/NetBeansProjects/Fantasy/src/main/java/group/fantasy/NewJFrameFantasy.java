@@ -35,20 +35,29 @@ public class NewJFrameFantasy extends javax.swing.JFrame {
     getContentPane().setBackground(new Color(20, 30, 45));
 
     titulo.setForeground(Color.WHITE);
-    titulo.setFont(new Font("SansSerif", Font.BOLD, 20));
+    titulo.setFont(new Font("SansSerif", Font.BOLD, 30));
+    titulo.setPreferredSize(new java.awt.Dimension(740, 150));
+    titulo.setHorizontalAlignment(JLabel.CENTER);
 
     JLabel etiquetaNombre = new JLabel("Nombre del equipo");
     etiquetaNombre.setForeground(Color.WHITE);
     etiquetaNombre.setFont(new Font("SansSerif", Font.PLAIN, 16));
+    etiquetaNombre.setPreferredSize(new java.awt.Dimension(740, 28));
+    etiquetaNombre.setHorizontalAlignment(JLabel.CENTER);
 
     campoNombre.setBackground(new Color(35, 48, 65));
     campoNombre.setForeground(Color.WHITE);
     campoNombre.setCaretColor(Color.WHITE);
     campoNombre.setFont(new Font("SansSerif", Font.PLAIN, 16));
+    campoNombre.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+            javax.swing.BorderFactory.createLineBorder(new Color(55, 74, 94)),
+            javax.swing.BorderFactory.createEmptyBorder(12, 14, 12, 14)));
 
     botonCrearEquipo.setBackground(new Color(40, 180, 100));
     botonCrearEquipo.setForeground(Color.WHITE);
     botonCrearEquipo.setFont(new Font("SansSerif", Font.BOLD, 14));
+    botonCrearEquipo.setPreferredSize(new java.awt.Dimension(150, 44));
+    botonCrearEquipo.setFocusPainted(false);
 
     add(titulo);
     add(etiquetaNombre);

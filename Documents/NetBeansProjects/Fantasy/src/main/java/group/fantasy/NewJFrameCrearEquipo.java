@@ -30,13 +30,15 @@ public NewJFrameCrearEquipo(String nombreEquipo, int presupuesto) {
     setSize(800, 600);
     setResizable(false);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+    setLayout(new FlowLayout(FlowLayout.CENTER, 20, 12));
 
     getContentPane().setBackground(new Color(20, 30, 45));
 
     JLabel etiquetaEquipo = new JLabel("Equipo: " + nombreEquipo);
     etiquetaEquipo.setForeground(Color.WHITE);
     etiquetaEquipo.setFont(new Font("SansSerif", Font.BOLD, 20));
+    etiquetaEquipo.setPreferredSize(new Dimension(740, 32));
+    etiquetaEquipo.setHorizontalAlignment(JLabel.CENTER);
     add(etiquetaEquipo);
 
     etiquetaPresupuesto =
@@ -44,16 +46,20 @@ public NewJFrameCrearEquipo(String nombreEquipo, int presupuesto) {
 
     etiquetaPresupuesto.setForeground(new Color(80, 220, 150));
     etiquetaPresupuesto.setFont(new Font("SansSerif", Font.BOLD, 18));
+    etiquetaPresupuesto.setPreferredSize(new Dimension(740, 28));
+    etiquetaPresupuesto.setHorizontalAlignment(JLabel.CENTER);
     add(etiquetaPresupuesto);
 
     JLabel tituloJugadores = new JLabel ("JUGADORES");
     tituloJugadores.setForeground(new Color(80,220,150));
     tituloJugadores.setFont(new Font ("SansSerif", Font.BOLD, 18));
-    tituloJugadores.setPreferredSize(new java.awt.Dimension(740, 40));
+    tituloJugadores.setPreferredSize(new java.awt.Dimension(740, 28));
     tituloJugadores.setHorizontalAlignment(JLabel.CENTER);
     add(tituloJugadores);
     
-    panelJugador.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 10));
+    // Tres tarjetas por fila; las siguientes filas se recorren verticalmente.
+    panelJugador.setLayout(new java.awt.GridLayout(0, 3, 16, 16));
+    panelJugador.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
     panelJugador.setBackground(new Color(20, 30, 45));
     
     panelJugador.add(crearTarjeta("Lamine Yamal", "lamine.jpg", 30));
@@ -68,10 +74,12 @@ public NewJFrameCrearEquipo(String nombreEquipo, int presupuesto) {
 
     javax.swing.JScrollPane scrollJugadores = new javax.swing.JScrollPane(
             panelJugador,
-            javax.swing.JScrollPane.VERTICAL_SCROLLBAR_NEVER,
-            javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    scrollJugadores.setPreferredSize(new Dimension(740, 330));
+            javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+            javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    scrollJugadores.setPreferredSize(new Dimension(740, 390));
     scrollJugadores.setBorder(null);
+    scrollJugadores.getViewport().setBackground(new Color(20, 30, 45));
+    scrollJugadores.getVerticalScrollBar().setUnitIncrement(24);
     add(scrollJugadores);
     setLocationRelativeTo(null);
 }
@@ -86,7 +94,10 @@ public NewJFrameCrearEquipo(String nombreEquipo, int presupuesto) {
         JPanel tarjeta = new JPanel();
         tarjeta.setLayout(new BoxLayout(tarjeta, BoxLayout.Y_AXIS));
         tarjeta.setBackground(new Color(35, 48, 65));
-        tarjeta.setPreferredSize(new Dimension(200, 280));
+        tarjeta.setPreferredSize(new Dimension(200, 320));
+        tarjeta.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(new Color(55, 74, 94)),
+                javax.swing.BorderFactory.createEmptyBorder(10, 8, 10, 8)));
 
         URL ruta = getClass().getResource("/" + archivoImagen);
         if (ruta == null) {
@@ -163,11 +174,23 @@ public NewJFrameCrearEquipo(String nombreEquipo, int presupuesto) {
         JButton venderJugador = new JButton("Vender");
         venderJugador.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
         venderJugador.setEnabled(false);
+        botonComprar.setBackground(new Color(40, 180, 100));
+        botonComprar.setForeground(Color.WHITE);
+        venderJugador.setBackground(new Color(55, 74, 94));
+        venderJugador.setForeground(Color.WHITE);
+        for (JButton boton : new JButton[]{botonComprar, venderJugador}) {
+            boton.setFont(new Font("SansSerif", Font.BOLD, 14));
+            boton.setFocusPainted(false);
+            boton.setMaximumSize(new Dimension(160, 30));
+        }
         
         tarjeta.add(fotoJugador);
         tarjeta.add(nombreJugador);
+        tarjeta.add(javax.swing.Box.createVerticalStrut(6));
         tarjeta.add(etiquetaPrecio);
+        tarjeta.add(javax.swing.Box.createVerticalStrut(10));
         tarjeta.add(botonComprar);
+        tarjeta.add(javax.swing.Box.createVerticalStrut(6));
         tarjeta.add(venderJugador);
         botonComprar.addActionListener(e -> {
     if (this.presupuesto >= precio) {
